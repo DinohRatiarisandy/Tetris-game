@@ -14,18 +14,18 @@ class Block:
 
         self.id = id
         self.colors = constants.COLORS
-        self.cells = dict()
+        self.cells = {}
         self.CELL_SIZE = 30
         self.rotation = 0
     
     def draw(self, SCREEN):
         """Draw the block with his main color"""
 
-        tiles = self.cells[self.rotation]
+        tiles = self.cells[self.rotation % 4]
         for tile in tiles:
             tile_rect = pygame.Rect(
-                tile.column*self.CELL_SIZE+1,
-                tile.row*self.CELL_SIZE+1,
+                tile.y*self.CELL_SIZE+1,
+                tile.x*self.CELL_SIZE+1,
                 self.CELL_SIZE-1,
                 self.CELL_SIZE-1
             )
