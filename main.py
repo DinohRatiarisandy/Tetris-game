@@ -5,6 +5,7 @@
 
 import pygame, sys
 from grid import Grid
+from tetrominos import LBlock
 
 pygame.init()
 
@@ -15,7 +16,8 @@ pygame.display.set_caption("TETRIS")
 CLOCK = pygame.time.Clock()
 
 game_grid = Grid()
-game_grid.print_grid()
+
+block = LBlock()
 
 while True:
     for event in pygame.event.get():
@@ -25,6 +27,7 @@ while True:
 
     SCREEN.fill(DARK_BLUE)
     game_grid.draw(SCREEN)
-    
+    block.draw(SCREEN)
+
     pygame.display.update()
     CLOCK.tick(60)
