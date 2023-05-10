@@ -4,13 +4,13 @@
 """
 
 
-from block import Block
+from tetromino import Block
 from pygame.math import Vector2
 
 class LBlock(Block):
     """The tetromino L shape"""
 
-    def __init(self):
+    def __init__(self):
         super().__init__(id=1)
         self.cells = {
             0: [Vector2(0, 2), Vector2(1, 0), Vector2(1, 1), Vector2(1, 2)],
