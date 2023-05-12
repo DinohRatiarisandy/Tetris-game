@@ -4,8 +4,7 @@
 """
 
 import pygame, sys
-from grid import Grid
-from tetrominos import LBlock
+from game import Game
 
 pygame.init()
 
@@ -15,19 +14,25 @@ pygame.display.set_caption("TETRIS")
 
 CLOCK = pygame.time.Clock()
 
-game_grid = Grid()
-
-block = LBlock()
+game = Game()
 
 while True:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type==pygame.KEYDOWN:
+            if event.key==pygame.K_LEFT:
+                game.move_left()
+            if event.key==pygame.K_RIGHT:
+                game.move_right()
+            if event.key==pygame.K_DOWN:
+                game.move_down()
+            if event.key==pygame.K_UP:
+                game.rotate()
 
     SCREEN.fill(DARK_BLUE)
-    game_grid.draw(SCREEN)
-    block.draw(SCREEN)
+    game.draw(SCREEN)
 
     pygame.display.update()
     CLOCK.tick(60)
