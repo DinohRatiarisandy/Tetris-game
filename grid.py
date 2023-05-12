@@ -2,8 +2,7 @@
     This module is for the manipulation of the grid
 """
 
-import pygame
-import constants
+import pygame, constants
 
 class Grid:
     """Make the grid on the SCREEN"""
@@ -27,9 +26,16 @@ class Grid:
             for col in range(self.NUM_COLS):
                 cell_value = self.grid[row][col]
                 cell_rect = pygame.Rect(
-                    self.CELL_SIZE*col+1,
-                    self.CELL_SIZE*row+1,
-                    self.CELL_SIZE-1,
-                    self.CELL_SIZE-1
+                    self.CELL_SIZE * col + 1,
+                    self.CELL_SIZE * row + 1,
+                    self.CELL_SIZE - 1,
+                    self.CELL_SIZE - 1
                 )
                 pygame.draw.rect(SCREEN, self.colors[cell_value], cell_rect)
+
+    def is_inside(self, row, col):
+        """Is the block inside the grid ?"""
+
+        if 0<=row<self.NUM_ROWS and 0<=col<self.NUM_COLS:
+            return True
+        return False
