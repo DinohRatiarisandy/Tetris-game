@@ -51,13 +51,19 @@ class Game:
         self.curr_block.move(1, 0)
         if not self.block_inside() or not self.block_fits():
             self.curr_block.move(-1, 0)
-            # check collision of the last line of the grid
-            # so show another random block
-            tiles = self.curr_block.get_cell_pos()
-            for pos in tiles:
-                self.grid.grid[int(pos.x)][int(pos.y)] = self.curr_block.id
-            self.curr_block = self.next_block
-            self.next_block = self.get_random_block()
+            self.lock_block()
+
+    def lock_block(self):
+        """check collision of the last line of the grid
+           or another block so show another random block"""
+        tiles = self.curr_block.get_cell_pos()
+        for pos in tiles:
+            self.grid.grid[int(pos.x)][int(pos.y)] = self.curr_block.id
+        self.curr_block = self.next_block
+        self.next_block = self.get_random_block()
+
+        # check if the one or many rows are full
+        self.grid.clear_full_rows()
     
     def block_fits(self):
         """Check if a new block collide with another block"""

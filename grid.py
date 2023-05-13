@@ -46,3 +46,35 @@ class Grid:
         if 0<=row<self.NUM_ROWS and 0<=col<self.NUM_COLS:
             return True
         return False
+
+    def is_row_full(self, row):
+        """Check if one row is full"""
+
+        for col in range(self.NUM_COLS):
+            if self.grid[row][col]==0:
+                return False
+        return True
+
+    def clear_row(self, row):
+        """clear a full row"""
+
+        for col in range(self.NUM_COLS):
+            self.grid[row][col] = 0
+    
+    def move_row_down(self, row, num_rows):
+        """move row down by the number of full rows"""
+
+        for col in range(self.NUM_COLS):
+            self.grid[row+num_rows][col] = self.grid[row][col]
+            self.grid[row][col] = 0
+    
+    def clear_full_rows(self):
+        """Combine check full rows, clear rows and move down"""
+
+        completed = 0
+        for row in range(self.NUM_ROWS-1, 0, -1):
+            if self.is_row_full(row):
+                self.clear_row(row)
+                completed += 1
+            elif completed > 0:
+                self.move_row_down(row, completed)
