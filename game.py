@@ -35,28 +35,44 @@ class Game:
         """Move the block to the left"""
 
         self.curr_block.move(0, -1)
-        if not self.block_inside():
+        if not self.block_inside() or not self.block_fits():
             self.curr_block.move(0, 1)
 
     def move_right(self):
         """Move the block to the right"""
 
         self.curr_block.move(0, 1)
-        if not self.block_inside():
+        if not self.block_inside() or not self.block_fits():
             self.curr_block.move(0, -1)        
 
     def move_down(self):
         """Move the block to the down"""
 
         self.curr_block.move(1, 0)
-        if not self.block_inside():
+        if not self.block_inside() or not self.block_fits():
             self.curr_block.move(-1, 0)
- 
+            # check collision of the last line of the grid
+            # so show another random block
+            tiles = self.curr_block.get_cell_pos()
+            for pos in tiles:
+                self.grid.grid[int(pos.x)][int(pos.y)] = self.curr_block.id
+            self.curr_block = self.next_block
+            self.next_block = self.get_random_block()
+    
+    def block_fits(self):
+        """Check if a new block collide with another block"""
+
+        tiles = self.curr_block.get_cell_pos()
+        for tile in tiles:
+            if not self.grid.is_empty(int(tile.x), int(tile.y)):
+                return False
+        return True
+
     def rotate(self):
         """Rotate the tetrimono"""
 
         self.curr_block.rotate()
-        if not self.block_inside():
+        if not self.block_inside() or not self.block_fits():
             self.curr_block.undo_rotation()
     
     def block_inside(self):

@@ -33,6 +33,13 @@ class Grid:
                 )
                 pygame.draw.rect(SCREEN, self.colors[cell_value], cell_rect)
 
+    def is_empty(self, row, col):
+        """check if a cell[r][c] is empty"""
+
+        if not self.grid[row][col]:
+            return True
+        return False
+    
     def is_inside(self, row, col):
         """Is the block inside the grid ?"""
 
