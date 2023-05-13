@@ -56,6 +56,8 @@ class Game:
         """Rotate the tetrimono"""
 
         self.curr_block.rotate()
+        if not self.block_inside():
+            self.curr_block.undo_rotation()
     
     def block_inside(self):
         """Is the block inside the grid ?"""

@@ -42,6 +42,11 @@ class Block:
 
         self.rotation_state += 1
 
+    def undo_rotation(self):
+        """undo the rotation in invalid position"""
+
+        self.rotation_state -= 1
+
     def draw(self, SCREEN):
         """Draw the block with his main color"""
 
