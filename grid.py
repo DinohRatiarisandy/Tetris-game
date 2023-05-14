@@ -2,7 +2,8 @@
     This module is for the manipulation of the grid
 """
 
-import pygame, constants
+import pygame
+import constants
 
 class Grid:
     """Make the grid on the SCREEN"""
@@ -18,7 +19,7 @@ class Grid:
         """Print the grid on the console"""
 
         return print('\n'.join(' '.join(map(str, ans)) for ans in self.grid))
-    
+
     def draw(self, SCREEN):
         """Draw the grid on window"""
 
@@ -39,7 +40,7 @@ class Grid:
         if not self.grid[row][col]:
             return True
         return False
-    
+
     def is_inside(self, row, col):
         """Is the block inside the grid ?"""
 
@@ -60,21 +61,23 @@ class Grid:
 
         for col in range(self.NUM_COLS):
             self.grid[row][col] = 0
-    
+
     def move_row_down(self, row, num_rows):
         """move row down by the number of full rows"""
 
         for col in range(self.NUM_COLS):
             self.grid[row+num_rows][col] = self.grid[row][col]
             self.grid[row][col] = 0
-    
+
     def clear_full_rows(self):
         """Combine check full rows, clear rows and move down"""
 
         completed = 0
-        for row in range(self.NUM_ROWS-1, 0, -1):
+        for row in range(self.NUM_ROWS-1, -1, -1):
             if self.is_row_full(row):
                 self.clear_row(row)
                 completed += 1
             elif completed > 0:
                 self.move_row_down(row, completed)
+
+        return completed
