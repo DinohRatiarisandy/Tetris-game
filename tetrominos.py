@@ -3,8 +3,8 @@
     all his rotation state
 """
 
-from tetromino import Block
 from pygame.math import Vector2
+from tetromino import Block
 
 class LBlock(Block):
     """The tetromino L shape"""
