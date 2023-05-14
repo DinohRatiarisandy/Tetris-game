@@ -10,6 +10,11 @@ from game import Game
 
 pygame.init()
 
+# Icon
+ICON_PATH = "./icon.png"
+icon_surface = pygame.image.load(ICON_PATH)
+pygame.display.set_icon(icon_surface)
+
 game_over_font = pygame.font.Font('./mario_font.ttf', 27)
 title_font = pygame.font.Font('./mario_font.ttf', 30)
 score_font = pygame.font.Font(None, 57)
