@@ -2,8 +2,9 @@
     This module is the parent of the all blocks
 """
 
-import pygame, constants
+import pygame
 from pygame.math import Vector2
+import constants
 
 class Block:
     """Class represent one block"""
@@ -47,14 +48,14 @@ class Block:
 
         self.rotation_state -= 1
 
-    def draw(self, SCREEN):
+    def draw(self, SCREEN, offset_x, offset_y):
         """Draw the block with his main color"""
 
         tiles = self.get_cell_pos()
         for tile in tiles:
             tile_rect = pygame.Rect(
-                tile.y * self.CELL_SIZE + 1,
-                tile.x * self.CELL_SIZE + 1,
+                tile.y * self.CELL_SIZE + offset_x,
+                tile.x * self.CELL_SIZE + offset_y,
                 self.CELL_SIZE - 1,
                 self.CELL_SIZE - 1
             )
